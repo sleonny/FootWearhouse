@@ -14,7 +14,7 @@ if (process.env.) {
     {
       host: 'localhost',
       dialect: 'mysql',
-      port: 
+      port:3001 
     }
   );
 }
