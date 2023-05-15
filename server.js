@@ -8,10 +8,17 @@ const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const app = express();
 
+<<<<<<< HEAD
 const shoeRouter = require("./shoe");
 const userRouter = require("./user");
 const tradeRouter = require("./trade");
 const shoeTradeRouter = require("./shoe_trade");
+=======
+const shoeRouter = require("./controllers/api_routes/shoe");
+const userRouter = require("./controllers/api_routes/user");
+const tradeRouter = require("./controllers/api_routes/trade");
+const shoeTradeRouter = require("./routes/shoe_trade");
+>>>>>>> abf587e551f202b8c546f4e1ea817334f8a43a03
 
 app.use("/shoes", shoeRouter);
 app.use("/users", userRouter);
