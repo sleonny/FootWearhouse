@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Profile } = require("../models");
+const { Profile } = require("./profile");
 
 // Get all profiles
 router.get("/", async (req, res) => {
