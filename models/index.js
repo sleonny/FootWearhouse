@@ -1,9 +1,20 @@
 const User = require("./user");
-const Shoe = requre("./shoe.js");
-const Trade = require("./shoe_trade.js");
-const ShoeTrade = require("./shoe_trade.js");
+const Profile = require("./Profile");
+const Shoe = require("./shoe");
+
+User.hasOne(Profile);
+Profile.belongsTo(User);
 
 User.hasMany(Shoe);
 Shoe.belongsTo(User);
-Trade.belongsToMany(Shoe, { through: ShoeTrade });
-Shoe.belongsToMany(Trade, { through: ShoeTrade });
+
+const sequelize = require("../sequelize");
+
+sequelize
+  .sync()
+  .then(() => {
+    console.log("Database schema synchronized.");
+  })
+  .catch((err) => {
+    console.error("Error synchronizing database:", err);
+  });
