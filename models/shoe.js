@@ -1,22 +1,19 @@
-const { Model, DataTypes } = require("sequelize");
-const bcrypt = require("bcrypt");
-const sequelize = require("./db");
-
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../sequelize'); // Assuming you have a separate file for Sequelize initialization
 
 class Shoe extends Model {}
-Shoe.init(
-  {
-    brand: DataTypes.STRING,
-    model: DataTypes.STRING,
-    size: DataTypes.DECIMAL,
-    price: DataTypes.DECIMAL,
-    description: DataTypes.STRING,
-    image: DataTypes.STRING,
-  },
-  { sequelize }
-);
 
+Shoe.init({
+  name: DataTypes.STRING,
+  description: DataTypes.TEXT,
+  size: DataTypes.STRING,
+  price: DataTypes.DECIMAL(10, 2)
+}, {
+  sequelize,
+  modelName: 'Shoe'
+});
 
+module.exports = Shoe;
 
 
 
