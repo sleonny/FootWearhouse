@@ -1,26 +1,18 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 const session = require("express-session");
-const bcrypt = require("bcrypt");
-const mysql = require("mysql2");
-const { Sequelize, Model, DataTypes } = require("sequelize");
+const { Sequelize, Model } = require("sequelize");
 
 const app = express();
 
-const shoeRouter = require("./controllers/api_routes/shoe.js");
-const userRouter = require("./controllers/api_routes/user.js");
-const tradeRouter = require("./controllers/api_routes/profile.js");
-
-
-app.use("/shoes", shoeRouter);
-app.use("/users", userRouter);
-app.use("/trades", tradeRouter);
-
+const userRouter = require("./controllers/api_routes/user");
+const profileRouter = require("./controllers/api_routes/profile");
+const shoeRouter = require("./controllers/api_routes/shoe");
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use(
   session({
     secret: "your_secret_key",
@@ -29,7 +21,7 @@ app.use(
   })
 );
 
-const sequelize = new Sequelize("database_name", "username", "password", {
+const sequelize = new Sequelize("FootWearHouse", "root", "1Qws7u12", {
   host: "localhost",
   dialect: "mysql",
 });
@@ -42,6 +34,16 @@ sequelize
   .catch((err) => {
     console.error("Unable to connect to the database:", err);
   });
+
+app.use("/user", userRouter);
+app.use("/profile", profileRouter);
+app.use("/shoe", shoeRouter);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Internal Server Error");
+});
 
 app.listen(3001, () => {
   console.log("Server listening on port 3001");
