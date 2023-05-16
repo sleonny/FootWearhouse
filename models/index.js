@@ -9,11 +9,15 @@ Profile.belongsTo(User);
 User.hasMany(Shoe);
 Shoe.belongsTo(User);
 
-sequelize
-  .sync({ force: true }) // Use { force: true } to drop and recreate the tables on each sync
-  .then(() => {
+async function syncDatabase() {
+  try {
+    await sequelize.sync({ force: true });
     console.log("Tables created successfully.");
-  })
-  .catch((err) => {
+  } catch (err) {
     console.error("Error creating tables:", err);
-  });
+  }
+}
+
+syncDatabase();
+
+
