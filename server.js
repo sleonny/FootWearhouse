@@ -10,13 +10,13 @@ const app = express();
 
 const shoeRouter = require("./controllers/api_routes/shoe.js");
 const userRouter = require("./controllers/api_routes/user.js");
-const tradeRouter = require("./controllers/api_routes/trade.js");
-const shoeTradeRouter = require("./controllers/api_routes/shoe_trade.js");
+const tradeRouter = require("./controllers/api_routes/profile.js");
+
 
 app.use("/shoes", shoeRouter);
 app.use("/users", userRouter);
 app.use("/trades", tradeRouter);
-app.use("/shoe_trades", shoeTradeRouter);
+
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
