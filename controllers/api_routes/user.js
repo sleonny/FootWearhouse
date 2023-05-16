@@ -1,52 +1,78 @@
 const express = require("express");
-const app = express();
+const router = express.Router();
+const { User, Profile, Shoe } = require("./user");
 
-// Define a GET route
-app.get("/api/users", (req, res) => {
-  // Handle the request
-  // Retrieve a list of users from a database, for example
-  const users = [
-    { id: 1, name: "John" },
-    { id: 2, name: "Jane" },
-  ];
-
-  // Send a JSON response
-  res.json(users);
+// Get all users
+router.get("/", async (req, res) => {
+  try {
+    const users = await User.findAll();
+    res.json(users);
+  } catch (error) {
+    console.error("Error retrieving users:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-// Define a POST route
-app.post("/api/users", (req, res) => {
-  // Handle the request
-  // Create a new user in a database, for example
-  const newUser = {
-    id: 3,
-    name: req.body.name,
-  };
-
-  // Send a JSON response
-  res.status(201).json(newUser);
+// Get a user by ID
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error("Error retrieving user:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-// Define a PUT route
-app.put("/api/users/:id", (req, res) => {
-  // Handle the request
-  // Update an existing user in a database, for example
-  const userId = req.params.id;
-  const updatedUser = {
-    id: userId,
-    name: req.body.name,
-  };
-
-  // Send a JSON response
-  res.json(updatedUser);
+// Create a new user
+router.post("/", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.create({ email, password });
+    res.status(201).json(user);
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-// Define a DELETE route
-app.delete("/api/users/:id", (req, res) => {
-  // Handle the request
-  // Delete an existing user from a database, for example
-  const userId = req.params.id;
-
-  // Send a JSON response
-  res.json({ message: `User with id ${userId} has been deleted.` });
+// Update a user by ID
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { email, password } = req.body;
+  try {
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    user.email = email;
+    user.password = password;
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
+
+// Delete a user by ID
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findByPk(id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    await user.destroy();
+    res.sendStatus(204);
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+module.exports = router;

@@ -1,84 +1,84 @@
 const express = require("express");
 const router = express.Router();
+const { Shoe } = require("./shoe");
 
-const Shoe = require("../models/Shoe");
-
-// GET all shoes
-router.get("/shoes", async (req, res) => {
+// Get all shoes
+router.get("/", async (req, res) => {
   try {
-    const shoes = await Shoe.find();
+    const shoes = await Shoe.findAll();
     res.json(shoes);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+  } catch (error) {
+    console.error("Error retrieving shoes:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// GET a single shoe by ID
-router.get("/shoes/:id", async (req, res) => {
+// Get a shoe by ID
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    const shoe = await Shoe.findById(req.params.id);
-    if (!shoe) return res.status(404).json({ msg: "Shoe not found" });
-    res.json(shoe);
-  } catch (err) {
-    console.error(err.message);
-    if (err.kind === "ObjectId") {
-      return res.status(404).json({ msg: "Shoe not found" });
+    const shoe = await Shoe.findByPk(id);
+    if (!shoe) {
+      return res.status(404).json({ error: "Shoe not found" });
     }
-    res.status(500).send("Server Error");
+    res.json(shoe);
+  } catch (error) {
+    console.error("Error retrieving shoe:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// POST a new shoe
-router.post("/shoes", async (req, res) => {
+// Create a new shoe
+router.post("/", async (req, res) => {
+  const { name, description, size, price } = req.body;
   try {
-    const { name, brand, price } = req.body;
-    const shoe = new Shoe({
+    const shoe = await Shoe.create({
       name,
-      brand,
+      description,
+      size,
       price,
     });
-    await shoe.save();
-    res.json(shoe);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(201).json(shoe);
+  } catch (error) {
+    console.error("Error creating shoe:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// PUT/update a shoe by ID
-router.put("/shoes/:id", async (req, res) => {
+// Update a shoe by ID
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, description, size, price } = req.body;
   try {
-    const { name, brand, price } = req.body;
-    const shoe = await Shoe.findById(req.params.id);
-    if (!shoe) return res.status(404).json({ msg: "Shoe not found" });
-    shoe.name = name || shoe.name;
-    shoe.brand = brand || shoe.brand;
-    shoe.price = price || shoe.price;
+    const shoe = await Shoe.findByPk(id);
+    if (!shoe) {
+      return res.status(404).json({ error: "Shoe not found" });
+    }
+    shoe.name = name;
+    shoe.description = description;
+    shoe.size = size;
+    shoe.price = price;
     await shoe.save();
     res.json(shoe);
-  } catch (err) {
-    console.error(err.message);
-    if (err.kind === "ObjectId") {
-      return res.status(404).json({ msg: "Shoe not found" });
-    }
-    res.status(500).send("Server Error");
+  } catch (error) {
+    console.error("Error updating shoe:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// DELETE a shoe by ID
-router.delete("/shoes/:id", async (req, res) => {
+// Delete a shoe by ID
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
   try {
-    const shoe = await Shoe.findById(req.params.id);
-    if (!shoe) return res.status(404).json({ msg: "Shoe not found" });
-    await shoe.remove();
-    res.json({ msg: "Shoe removed" });
-  } catch (err) {
-    console.error(err.message);
-    if (err.kind === "ObjectId") {
-      return res.status(404).json({ msg: "Shoe not found" });
+    const shoe = await Shoe.findByPk(id);
+    if (!shoe) {
+      return res.status(404).json({ error: "Shoe not found" });
     }
-    res.status(500).send("Server Error");
+    await shoe.destroy();
+    res.sendStatus(204);
+  } catch (error) {
+    console.error("Error deleting shoe:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
