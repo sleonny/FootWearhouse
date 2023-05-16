@@ -1,9 +1,9 @@
-const { Model, DataTypes } = require("sequelize");
-const sequelize = require("../sequelize");
+const { DataTypes } = require("sequelize");
+const sequelize = require("./sequelize");
+const User = require("./user");
 
-class Profile extends Model {}
-
-Profile.init(
+const Profile = sequelize.define(
+  "Profile",
   {
     shoes_for_sale: DataTypes.STRING,
     shoes_for_trade: DataTypes.STRING,
@@ -13,7 +13,10 @@ Profile.init(
   {
     sequelize,
     modelName: "Profile",
+    // Profile model definition
   }
 );
 
+Profile.belongsTo(User);
+User.hasOne(Profile);
 module.exports = Profile;

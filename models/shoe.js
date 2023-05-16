@@ -11,7 +11,7 @@ price: DataTypes.DECIMAL(10, 2),
 {
 sequelize,
 modelName: "Shoe",
-  // Shoe model definition
+ 
 });
 
 Shoe.belongsTo(User);
