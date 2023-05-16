@@ -1,3 +1,4 @@
+const sequelize = require("../sequelize");
 const User = require("./user");
 const Profile = require("./Profile");
 const Shoe = require("./shoe");
@@ -8,13 +9,12 @@ Profile.belongsTo(User);
 User.hasMany(Shoe);
 Shoe.belongsTo(User);
 
-const sequelize = require("../sequelize");
 
-sequelize
-  .sync()
+
+sequelize.sync({ force: true }) // Use { force: true } to drop and recreate the tables on each sync
   .then(() => {
-    console.log("Database schema synchronized.");
+    console.log('Tables created successfully.');
   })
   .catch((err) => {
-    console.error("Error synchronizing database:", err);
+    console.error('Error creating tables:', err);
   });
