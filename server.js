@@ -46,5 +46,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(3001, () => {
-  console.log("Server listening on port 3001");
+  console.log("Server listening on port 3306");
 });
