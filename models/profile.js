@@ -1,14 +1,23 @@
-const { DataTypes } = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 const sequelize = require("./sequelize");
 const User = require("./user");
 
-const Profile = sequelize.define(
-  "Profile",
+class Profile extends Model {}
+
+Profile.init(
   {
-    shoes_for_sale: DataTypes.STRING,
-    shoes_for_trade: DataTypes.STRING,
-    shoes_for_both: DataTypes.STRING,
-    wishlist: DataTypes.STRING,
+    shoes_for_sale: {
+      type: DataTypes.STRING,
+    },
+    shoes_for_trade: {
+      type: DataTypes.STRING,
+    },
+    shoes_for_both: {
+      type: DataTypes.STRING,
+    },
+    wishlist: {
+      type: DataTypes.STRING,
+    },
   },
   {
     sequelize,
@@ -17,4 +26,4 @@ const Profile = sequelize.define(
   }
 );
 
-
+module.exports = Profile;
