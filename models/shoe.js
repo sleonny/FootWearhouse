@@ -14,8 +14,6 @@ modelName: "Shoe",
  
 });
 
-Shoe.belongsTo(User);
-User.hasMany(Shoe);
-module.exports = Shoe;
+
 
 

@@ -17,6 +17,4 @@ const Profile = sequelize.define(
   }
 );
 
-Profile.belongsTo(User);
-User.hasOne(Profile);
-module.exports = Profile;
+

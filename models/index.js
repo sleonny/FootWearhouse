@@ -1,22 +1,15 @@
 const sequelize = require("./sequelize");
 const User = require("./user");
-const Profile = require("./Profile");
+const Profile = require("./profile");
 const Shoe = require("./shoe");
 
-User.hasOne(Profile);
-Profile.belongsTo(User);
-
-User.hasMany(Shoe);
 Shoe.belongsTo(User);
+User.hasMany(Shoe);
+module.exports = Shoe;
 
-async function syncDatabase() {
-  try {
-    await sequelize.sync({ force: true });
-    console.log("Tables created successfully.");
-  } catch (err) {
-    console.error("Error creating tables:", err);
-  }
-}
+Profile.belongsTo(User);
+User.hasOne(Profile);
+module.exports = Profile;
 
 syncDatabase();
 
