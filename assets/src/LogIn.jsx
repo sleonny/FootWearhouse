@@ -1,8 +1,11 @@
 import React from "react";
+import FieldComponent from "./FieldComponent";
 
 const LogIn = () => {
     return (
-        <div> Log in </div>
+        <div>
+            <FieldComponent title="LogIn" />
+        </div>
     )
 };
 
