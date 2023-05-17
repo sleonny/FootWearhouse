@@ -1,6 +1,6 @@
-const express = require("express");
 const router = express.Router();
-const { Profile } = require("./profileRoutes");
+const { Profile } = require("../api_routes/index");
+
 
 // Get all profiles
 router.get("/", async (req, res) => {
