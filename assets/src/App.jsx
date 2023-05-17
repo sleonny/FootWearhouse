@@ -1,35 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
+  // Link
 } from "react-router-dom";
 import SignUp from "./SignUp";
 import LogIn from "./LogIn";
+import { Button } from "react-bootstrap";
 
 export default function App() {
+  const [showLogInModal, setShowLogInModal] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
+
   return (
     <Router>
       <div>
         <nav>
-          <ul>
-            <li>
-              <Link to="/">Login</Link>
-            </li>
-            <li>
-              <Link to="/sign-up">Sign up</Link>
-            </li>
-          </ul>
+          {/* <Link to="/">Login</Link> */}
+          <Button onClick={() => setShowLogInModal(true)}>Login</Button>
+          <Button onClick={() => setShowSignUpModal(true)}>Sign up</Button>
         </nav>
-
-        {/* A <Routes> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+        <LogIn show={showLogInModal} handleClose={() => setShowLogInModal(false)} />
+        <SignUp show={showSignUpModal} handleClose={() => setShowSignUpModal(false)} />
         <Routes>
-          <Route path="/sign-up" element={<SignUp/>} />
-          <Route path="/" element={<LogIn/>} />
+          <Route path="/" element={<Home/>} />
         </Routes>
+        <footer>Add Footer Here</footer>
       </div>
     </Router>
   );
+}
+
+const Home = () => {
+  return (
+    <div>
+      Add Carousel Here
+    </div>
+  )
 }
