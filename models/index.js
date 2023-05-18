@@ -1,6 +1,6 @@
 const sequelize = require("../config/connection");
-const User = require("../models");
-const Profile = require("./profile");
+const User = require("./User");
+const Profile = require("./Profile");
 const Shoe = require("./Shoe");
 
 Shoe.belongsTo(User);
