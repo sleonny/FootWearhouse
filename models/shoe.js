@@ -18,6 +18,14 @@ Shoe.init(
     price: {
       type: DataTypes.DECIMAL(10, 2),
     },
+    // Add foreign key
+    UserId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: User,
+        key: "id",
+      },
+    },
   },
   {
     sequelize,
