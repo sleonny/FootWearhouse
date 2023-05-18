@@ -1,7 +1,7 @@
-const sequelize = require('./sequelize');
-const User = require('./user');
-const Profile = require('./profile');
-const Shoe = require('./shoe');
+const sequelize = require("../config/connection");
+const User = require("./User");
+const Profile = require("./profile");
+const Shoe = require("./Shoe");
 
 Shoe.belongsTo(User);
 User.hasMany(Shoe);
@@ -15,8 +15,3 @@ module.exports = {
   Profile,
   Shoe,
 };
-
-
-
-
-

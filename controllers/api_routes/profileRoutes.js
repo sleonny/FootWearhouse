@@ -1,5 +1,5 @@
-const router = express.Router();
-const { Profile } = require("../api_routes/index");
+const router = require("express").Router();
+const { Profile } = require("../../models/profile");
 
 // Get all profiles
 router.get("/", async (req, res) => {

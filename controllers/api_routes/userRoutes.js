@@ -1,5 +1,5 @@
-const router = express.Router();
-const { User } = require("./models/user");
+const router = require("express").Router();
+const { User } = require("../../models");
 
 // Get all users
 router.get("/", async (req, res) => {
@@ -29,9 +29,12 @@ router.get("/:id", async (req, res) => {
 
 // Create a new user
 router.post("/", async (req, res) => {
-  const { email, password } = req.body;
+  // const { email, password } = req.body;
   try {
-    const user = await User.create({ email, password });
+    const user = await User.create({
+      email: req.body.email,
+      password: req.body.password,
+    });
     res.status(201).json(user);
   } catch (error) {
     console.error("Error creating user:", error);
