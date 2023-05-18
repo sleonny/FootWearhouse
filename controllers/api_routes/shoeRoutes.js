@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Shoe } = require("../../models/Shoe");
+const { Shoe } = require("../../models");
 
 // Get all shoes
 router.get("/", async (req, res) => {
@@ -29,13 +29,13 @@ router.get("/:id", async (req, res) => {
 
 // Create a new shoe
 router.post("/", async (req, res) => {
-  const { name, description, size, price } = req.body;
+  // const { name, description, size, price } = req.body;
   try {
     const shoe = await Shoe.create({
-      name,
-      description,
-      size,
-      price,
+      name: req.body.name,
+      description: req.body.description,
+      size: req.body.size,
+      price: req.body.price,
     });
     res.status(201).json(shoe);
   } catch (error) {
