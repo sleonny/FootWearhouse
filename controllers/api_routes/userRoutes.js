@@ -36,9 +36,49 @@ router.post("/", async (req, res) => {
       password: req.body.password,
     });
     res.status(201).json(user);
-  } catch (error) {
-    console.error("Error creating user:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+  
+//Setting up sessions with loggedIn variable set to true
+  req.session.save(() => {
+  req.session.user_id = user.id;
+  req.session.logged_in = true;
+
+  res.status(200).json(user);
+});
+}catch (err) {
+console.log(err);
+res.status(500).json(err);
+}
+});
+
+// Log in Session 
+router.post('/login', async (req, res) => {
+  try {
+    const userData = await User.findOne({ where: { email: req.body.email } });
+
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
+    }
+
+    const validPassword = await userData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.user_id = user.id;
+      req.session.logged_in = true;
+      
+      res.json({ user: userData, message: 'You are now logged in!' });
+    });
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 
