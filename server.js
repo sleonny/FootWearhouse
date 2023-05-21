@@ -54,11 +54,12 @@
 
 const path = require("path");
 const express = require("express");
+const routes = require("./controllers/api_routes");
 const cors = require("cors");
 const session = require("express-session");
-const userRouter = require("./controllers/api_routes/user");
-const profileRouter = require("./controllers/api_routes/profile");
-const shoeRouter = require("./controllers/api_routes/shoe");
+const userRouter = require("./controllers/api_routes/userRoutes");
+const profileRouter = require("./controllers/api_routes/profileRoutes");
+const shoeRouter = require("./controllers/api_routes/shoeRoutes");
 const sequelize = require("./config/connection");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
@@ -84,7 +85,7 @@ app.use(session(sess));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(routes);
 
