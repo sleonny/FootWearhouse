@@ -1,8 +1,8 @@
-const router = require("express").Router();
+const app = require("express")();
 const { Profile } = require("../../models");
 
 // Get all profiles
-router.get("/", async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     const profiles = await Profile.findAll();
     res.json(profiles);
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 });
 
 // Get a profile by ID
-router.get("/:id", async (req, res) => {
+app.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const profile = await Profile.findByPk(id);
@@ -28,7 +28,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Create a new profile
-router.post("/", async (req, res) => {
+app.post("/", async (req, res) => {
   const { shoes_for_sale, shoes_for_trade, shoes_for_both, wishlist } =
     req.body;
   try {
@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
 });
 
 // Update a profile by ID
-router.put("/:id", async (req, res) => {
+app.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { shoes_for_sale, shoes_for_trade, shoes_for_both, wishlist } =
     req.body;
@@ -68,7 +68,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete a profile by ID
-router.delete("/:id", async (req, res) => {
+app.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const profile = await Profile.findByPk(id);
@@ -83,4 +83,4 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = app;

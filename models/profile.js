@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
-const User = require("../models");
+const User = require("../models/User"); // Assuming the User model is located in the "../models" directory
 
 class Profile extends Model {}
 
@@ -18,6 +18,14 @@ Profile.init(
     wishlist: {
       type: DataTypes.STRING,
     },
+    userId: {
+      type: DataTypes.INTEGER, // Assuming the ID column in the User model is of INTEGER type
+      allowNull: false,
+      references: {
+        model: User,
+        key: "id",
+      },
+    },
   },
   {
     sequelize,
@@ -26,6 +34,4 @@ Profile.init(
   }
 );
 
-module.exports = Profile;       
-
-
+module.exports = Profile;

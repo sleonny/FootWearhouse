@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
-const User = require("../models");
+const User = require("../models/User"); // Assuming the User model is located in the "../models" directory
 
 class Shoe extends Model {}
 
@@ -18,9 +18,9 @@ Shoe.init(
     price: {
       type: DataTypes.DECIMAL(10, 2),
     },
-    // Add foreign key
-    UserId: {
-      type: DataTypes.INTEGER,
+    userId: {
+      type: DataTypes.INTEGER, // Assuming the ID column in the User model is of INTEGER type
+      allowNull: false,
       references: {
         model: User,
         key: "id",
