@@ -1,8 +1,8 @@
-const app = require("express").Router();
+const router = require("express").Router();
 const { User } = require("../../models");
 
 // Get all users
-app.get("/", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const users = await User.findAll();
     res.json(users);
@@ -13,7 +13,7 @@ app.get("/", async (req, res) => {
 });
 
 // Get a user by ID
-app.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const user = await User.findByPk(id);
@@ -28,7 +28,7 @@ app.get("/:id", async (req, res) => {
 });
 
 // Create a new user
-app.post("/", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const user = await User.create({
       email: req.body.email,
@@ -49,7 +49,7 @@ app.post("/", async (req, res) => {
 });
 
 // Log in Session
-app.post("/login", async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
 
@@ -81,7 +81,7 @@ app.post("/login", async (req, res) => {
 });
 
 // Update a user by ID
-app.put("/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const { email, password } = req.body;
   try {
@@ -100,7 +100,7 @@ app.put("/:id", async (req, res) => {
 });
 
 // Delete a user by ID
-app.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const user = await User.findByPk(id);
@@ -115,4 +115,4 @@ app.delete("/:id", async (req, res) => {
   }
 });
 
-module.exports = app;
+module.exports = router;
