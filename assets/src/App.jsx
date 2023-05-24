@@ -10,7 +10,7 @@ import { Button, Carousel } from "react-bootstrap";
 import heels from "./images/black_heels.webp";
 import stretchShoes from "./images/close-up-woman-stretching-her-hand-leg-sitting-exercise-mat.jpg";
 import sports from "./images/sun-kissed-sports-shoes-rest-tranquil-pier-generated-by-ai.jpg"
-import Profile from "./Profile";
+import Shoes from "./Shoes";
 
 export default function App() {
   const [showLogInModal, setShowLogInModal] = useState(false);
@@ -26,7 +26,7 @@ export default function App() {
         <LogIn show={showLogInModal} handleClose={() => setShowLogInModal(false)} />
         <SignUp show={showSignUpModal} handleClose={() => setShowSignUpModal(false)} />
         <Routes>
-          <Route path="/profile" element={<Profile/>} />
+          <Route path="/shoes" element={<Shoes/>} />
           <Route path="/" element={<Home/>} />
         </Routes>
         <footer style={{ backgroundColor: 'black', position: 'fixed', width: '100%', bottom: '0', height: '100px', color: 'white', textAlign: 'center' }} >Foot Wearhouse</footer>

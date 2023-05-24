@@ -17,7 +17,7 @@ const LogIn = ({ show, handleClose }) => {
             <Button variant="secondary" onClick={handleClose}>
                 Close
             </Button>
-            <Link to="/profile" onClick={handleClose} >Enter</Link>
+            <Link to="/shoes" onClick={handleClose} >Enter</Link>
             </Modal.Footer>
         </Modal>
     )
