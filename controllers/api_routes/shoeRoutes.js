@@ -36,7 +36,6 @@ router.post("/", async (req, res) => {
       description: req.body.description,
       size: req.body.size,
       price: req.body.price,
-      UserId: req.body.userId,
     });
     res.status(201).json(shoe);
   } catch (error) {
