@@ -40,5 +40,5 @@ app.use(cors());
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log("Now listening on PORT 3306"));
+  app.listen(PORT, () => console.log("Now listening on PORT 3001"));
 });
