@@ -1,3 +1,4 @@
+const express = require("express");
 const router = require("express").Router();
 const path = require("path");
 const { Shoe, User } = require("../models");
@@ -29,3 +30,5 @@ router.get("/signup", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+module.exports = router;
