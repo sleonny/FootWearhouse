@@ -18,15 +18,12 @@ Shoe.init(
     price: {
       type: DataTypes.DECIMAL(10, 2),
     },
-    userId: {
+    user_id: {
       type: DataTypes.INTEGER, // Assuming the ID column in the User model is of INTEGER type
       allowNull: false,
-      references: {
-        model: User,
-        key: "id",
-      },
     },
   },
+
   {
     sequelize,
     modelName: "Shoe",
