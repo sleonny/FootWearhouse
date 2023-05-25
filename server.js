@@ -35,10 +35,16 @@ app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "assets", "build")));
+
+// app.get("/", function (req, res) {
+//   res.sendFile(path.join(__dirname, "assets", "build", "index.html"))
+// });
+
 app.use(cors());
 
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log("Now listening on PORT 3306"));
+  app.listen(PORT, () => console.log(`Now listening on PORT ${PORT}`));
 });
