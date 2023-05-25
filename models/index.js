@@ -1,6 +1,6 @@
-const sequelize = require("../config/connection");
+// const sequelize = require("../config/connection");
 const User = require("./User");
-const Shoe = require("./Shoe");
+const Shoe = require("./shoe");
 
 User.hasMany(Shoe, {
   foreignKey: 'user_id',
@@ -13,8 +13,8 @@ Shoe.belongsTo(User, {
 
 
 
+// sequelize,
 module.exports = {
-  sequelize,
   User,
   Shoe,
 };
