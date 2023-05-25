@@ -5,13 +5,8 @@ const Shoes = () => {
     const [shoes, setShoes] = useState([]);
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
-
         fetch('/shoes', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-              }
+            method: 'GET'
         })
         .then(resp => resp.json())
         .then(data => setShoes(data))
