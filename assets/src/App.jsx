@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  Link
 } from "react-router-dom";
 import SignUp from "./SignUp";
 import LogIn from "./LogIn";
@@ -13,6 +14,7 @@ import sports from "./images/sun-kissed-sports-shoes-rest-tranquil-pier-generate
 import Shoes from "./Shoes";
 
 export default function App() {
+  const userId = localStorage.getItem("userId");
   const [showLogInModal, setShowLogInModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
 
@@ -20,8 +22,17 @@ export default function App() {
     <Router>
       <div>
         <nav style={{ backgroundColor: 'black' }}>
-          <Button variant='dark' onClick={() => setShowLogInModal(true)}>Login</Button>
-          <Button variant='dark' onClick={() => setShowSignUpModal(true)}>Sign up</Button>
+          {userId ? (
+            <>
+              <Link to='/shoes' style={{ color: 'white', padding: '15px' }} >Shoes</Link>
+              <Button variant='dark'>Log Out</Button>
+            </>
+          ) : (
+            <>
+              <Button variant='dark' onClick={() => setShowLogInModal(true)}>Login</Button>
+              <Button variant='dark' onClick={() => setShowSignUpModal(true)}>Sign up</Button>
+            </>
+          )}
         </nav>
         <LogIn show={showLogInModal} handleClose={() => setShowLogInModal(false)} />
         <SignUp show={showSignUpModal} handleClose={() => setShowSignUpModal(false)} />
