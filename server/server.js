@@ -39,8 +39,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use(routes);
-
-app.use(express.static(path.join("client", "build")));
+console.log(__dirname)
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 sequelize.sync({ force: false }).then(() => {
   // app.listen(PORT, () => console.log("Now listening on PORT 3001"));
