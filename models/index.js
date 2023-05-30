@@ -1,17 +1,15 @@
 // const sequelize = require("../config/connection");
 const User = require("./User");
-const Shoe = require("./shoe");
+const Shoe = require("./Shoe");
 
 User.hasMany(Shoe, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE'
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
 });
 
 Shoe.belongsTo(User, {
-  foreignKey: 'user_id'
+  foreignKey: "user_id",
 });
-
-
 
 // sequelize,
 module.exports = {
