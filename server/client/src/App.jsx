@@ -14,7 +14,6 @@ import sports from "./images/sun-kissed-sports-shoes-rest-tranquil-pier-generate
 import Shoes from "./Shoes";
 
 export default function App() {
-  const userId = localStorage.getItem("userId");
   const [showLogInModal, setShowLogInModal] = useState(false);
   const [showSignUpModal, setShowSignUpModal] = useState(false);
 
@@ -22,17 +21,9 @@ export default function App() {
     <Router>
       <div>
         <nav style={{ backgroundColor: 'black' }}>
-          {userId ? (
-            <>
-              <Link to='/shoes' style={{ color: 'white', padding: '15px' }} >Shoes</Link>
-              <Button variant='dark'>Log Out</Button>
-            </>
-          ) : (
-            <>
-              <Button variant='dark' onClick={() => setShowLogInModal(true)}>Login</Button>
-              <Button variant='dark' onClick={() => setShowSignUpModal(true)}>Sign up</Button>
-            </>
-          )}
+          <Button variant='dark' onClick={() => setShowLogInModal(true)}>Login</Button>
+          <Button variant='dark' onClick={() => setShowSignUpModal(true)}>Sign up</Button>
+          <Link to='/shoes' style={{ color: 'white', padding: '15px' }} >Shoes</Link>
         </nav>
         <LogIn show={showLogInModal} handleClose={() => setShowLogInModal(false)} />
         <SignUp show={showSignUpModal} handleClose={() => setShowSignUpModal(false)} />
