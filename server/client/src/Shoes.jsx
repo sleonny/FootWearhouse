@@ -35,6 +35,7 @@ const Shoes = () => {
     const handleCreate = async () => {
         return fetch('/api/shoe', {
             method: 'POST',
+            headers: { "Content-Type": "application/json"},
             body: JSON.stringify(formData)
         })
         .then(async resp => {
@@ -49,7 +50,7 @@ const Shoes = () => {
         })
         .catch(err => console.log(err))
     };
-
+    
     return (
         <div>
             <h1>Shoes</h1>
@@ -64,9 +65,9 @@ const Shoes = () => {
                 <Modal.Body>
                     <form>
                         <input className='mt-3' onChange={handleChange} type='text' name='name' placeholder="Enter your shoe's name" /><br />
-                        <textarea className='mt-3' onChange={handleChange} name='nickname' placeholder="Enter your shoe's description" cols='40' rows='3' /><br />
-                        <input className='mt-3' onChange={handleChange} type='text' name='breed' placeholder="Enter your shoe's size" /><br />
-                        $<input className='mt-3' onChange={handleChange} type='text' name='color' placeholder="Enter your shoe's price" />
+                        <textarea className='mt-3' onChange={handleChange} name='description' placeholder="Enter your shoe's description" cols='40' rows='3' /><br />
+                        <input className='mt-3' onChange={handleChange} type='text' name='size' placeholder="Enter your shoe's size" /><br />
+                        $<input className='mt-3' onChange={handleChange} type='text' name='price' placeholder="Enter your shoe's price" />
                     </form>
                     {error}
                 </Modal.Body>

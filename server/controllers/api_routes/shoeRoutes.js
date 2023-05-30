@@ -30,6 +30,7 @@ router.get("/:id", async (req, res) => {
 
 // Create a new shoe
 router.post("/", async (req, res) => {
+
   try {
     const shoe = await Shoe.create({
       name: req.body.name,
