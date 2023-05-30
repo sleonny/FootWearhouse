@@ -39,7 +39,11 @@ app.use(cors());
 
 app.use(routes);
 
-app.use(express.static(path.join(__dirname, "client", "build")));
+if (process.env.NODE_ENV !== "development") {
+  app.use(express.static("public"));
+} else {
+  app.use(express.static(path.join(__dirname, "client", "build")));
+}
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
