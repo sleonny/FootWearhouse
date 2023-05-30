@@ -9,7 +9,7 @@
     "install": "cd server && npm i && cd client && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build",
-    "production": "cd server && cd client && npm run build && cd .. && node server.js"
+    "heroku-postbuild": "cd server && npm install && cd client && npm install && npm run build && cd .. && node server.js"
   },
   "author": "",
   "license": "ISC",
