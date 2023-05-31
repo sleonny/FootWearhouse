@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.eeb58aea.css",
+    "main.js": "/static/js/main.b3094011.js",
+    "static/js/787.27d9e41c.chunk.js": "/static/js/787.27d9e41c.chunk.js",
+    "static/media/close-up-woman-stretching-her-hand-leg-sitting-exercise-mat.jpg": "/static/media/close-up-woman-stretching-her-hand-leg-sitting-exercise-mat.4d0aea91762ddac966a4.jpg",
+    "static/media/sun-kissed-sports-shoes-rest-tranquil-pier-generated-by-ai.jpg": "/static/media/sun-kissed-sports-shoes-rest-tranquil-pier-generated-by-ai.f2690e220302dc43c44c.jpg",
+    "static/media/black_heels.webp": "/static/media/black_heels.6fb39a0a77fdb464f48e.webp",
+    "index.html": "/index.html",
+    "main.eeb58aea.css.map": "/static/css/main.eeb58aea.css.map",
+    "main.b3094011.js.map": "/static/js/main.b3094011.js.map",
+    "787.27d9e41c.chunk.js.map": "/static/js/787.27d9e41c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eeb58aea.css",
+    "static/js/main.b3094011.js"
+  ]
+}
